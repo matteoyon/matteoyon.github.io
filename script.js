@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', function(){
                 output.innerHTML += 'Available commands: help, about, projects, contact\n';
                 break;
             case 'about':
-                output.innerHTML += "I'm a software developer and this is my first attemp to make a website.\nYup, I've never had experiene with Html/CSS/Js before.\nYup, probably if you press F12 you will see a multiple errors.\nYup, it's a work in progress and probably I'll drop this project at a certain time\n";
+                output.innerHTML += "I'm a software developer and this is my first attemp to make a website.\nYup, I've never had experiene with Html/CSS/Js before.\nYup, probably if you press F12 you will see multiple errors in the console.\nYup, it's a work in progress and probably I'll drop this project at a certain time\n";
                 break;
             case'projects':
                 output.innerHTML += "No more projects for now :(\n";
