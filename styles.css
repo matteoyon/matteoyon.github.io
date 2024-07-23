@@ -1,13 +1,14 @@
 body {
     background-color: #000;
-    color: #00ff00;
-    font-family: 'Courier New', Courier, monospace;
+    color: #aaff00;
+    font-family: "JetBrains Mono", monospace;
     margin: 0;
     padding: 0;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
+    font-size: medium;
 }
 
 .terminal {
@@ -25,6 +26,7 @@ body {
     overflow-y: auto;
     max-height: 80vh;
     font-family: inherit;
+    font-size: medium;
 }
 
 .input-line {
@@ -39,10 +41,11 @@ body {
 #cmd-input {
     background: none;
     border: none;
-    color: #00ff00;
+    color: #aaff00;
     outline: none;
     flex-grow: 1;
     font-family: inherit;
+    font-size: medium;
 }
 
 #cmd-input::after {
