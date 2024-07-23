@@ -1,0 +1,4 @@
+I'm a software developer and this is my first attemp to make a website.
+Yup, I've never had experiene with Html/CSS/Js before.
+Yup, probably if you press F12 you will see multiple errors in the console.
+Yup, it's a work in progress and probably I'll drop this project at a certain time.

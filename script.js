@@ -10,26 +10,30 @@ document.addEventListener('DOMContentLoaded', function(){
         }
     });
 
-    function exec(command) {
+    async function exec(command) {
 
        output.innerHTML += '~ ' + input.value + '\n'; 
 
-        switch (command) {
-            case 'help':
-                output.innerHTML += 'Available commands: help, about, projects, contact\n';
-                break;
-            case 'about':
-                output.innerHTML += "I'm a software developer and this is my first attemp to make a website.\nYup, I've never had experiene with Html/CSS/Js before.\nYup, probably if you press F12 you will see multiple errors in the console.\nYup, it's a work in progress and probably I'll drop this project at a certain time\n";
-                break;
-            case'projects':
-                output.innerHTML += "No more projects for now :(\n";
-                break;    
-            case 'contact':
-                output.innerHTML += 'Send mail to: matteoyon[at]live.com\n';
-                break;    
-            default:
-                output.innerHTML += 'Command not found: ' + command + '\nType "help" to see a list of available commands\n';
-                break;
+        if (command === 'help') {
+                output.innerHTML += 'Available commands: help, about, projects, contact\n';   
+        }else if (command) {
+            try {
+                const response = await fetch(`resources/${command}.txt`);
+                if (response.ok) {
+                    const text = await response.text();
+                    const outputDiv = document.createElement('div');
+                    outputDiv.innerHTML = text + '<br>';
+                    output.appendChild(outputDiv);
+                    output.scrollTop = output.scrollHeight;
+                } else {
+                    throw new Error('File not found');
+                }
+            } catch (error) {
+                const outputDiv = document.createElement('div');
+                outputDiv.innerHTML += 'Command not found: ' + command + '\nType "help" to see a list of available commands\n';
+                output.appendChild(outputDiv);
+                output.scrollTop = output.scrollHeight;
+            }
         }
 
         output.scrollTop = output.scrollHeight;
