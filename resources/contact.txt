@@ -1,1 +1,2 @@
-Send mail to: matteoyon[at]live.com
+    * Send mail to: <a href="mailto:matteoyon@live.com">matteoyon@live.com</a>
+    * Linkedin: <a href="https://www.linkedin.com/in/matteoyon/"  target="_blank">linkedin.com/in/matteoyon</a>
