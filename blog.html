@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Blog Posts - MY website</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+
+<body>
+    <div>
+    <h1>Blog Posts</h1>
+    <a href="index.html">Back to terminal</a></br>
+    <br>A not so interesting list of what pops in my mind<br>
+    <ul id="blog-list"></ul>
+    <div id="post-content"></div>
+    
+    <script type="module">
+        const blogPosts = [
+            {
+                title: 'My Second Blog Post',
+                date: '2025-05-04',
+                url: 'resources/blog/20250504-2045.md'
+            },
+            {
+                title: 'My First Blog Post',
+                date: '2025-05-04',
+                url: 'resources/blog/20250504-2045.md'
+            }
+            // Add more blog posts here
+        ];
+        const list = document.getElementById('blog-list');
+        const postContent = document.getElementById('post-content');
+
+        blogPosts.forEach(post => {
+            const li = document.createElement('li');
+            li.innerHTML = `<a href="#">${post.title}</a> <small>${post.date}</small>`;
+            li.querySelector('a').addEventListener('click', async (e) => {
+                e.preventDefault();
+                const res = await fetch(post.url);
+                const md = await res.text();
+                postContent.innerHTML = marked.parse(md);
+                postContent.style.display = 'block';
+                list.style.display = 'none';
+            });
+            list.appendChild(li);
+        });
+    </script>
+</body>
+
+</html>

@@ -15,7 +15,9 @@ document.addEventListener('DOMContentLoaded', function(){
        output.innerHTML += '~ ' + input.value + '\n'; 
 
         if (command === 'help') {
-                output.innerHTML += 'Available commands: help, about, projects, contact\n';   
+                output.innerHTML += 'Available commands: help, about, blog, projects, contact\n';   
+        }else if (command === 'blog'){
+            window.location.href = 'blog.html';
         }else if (command) {
             try {
                 const response = await fetch(`resources/${command}.txt`);
@@ -37,6 +39,11 @@ document.addEventListener('DOMContentLoaded', function(){
         }
 
         output.scrollTop = output.scrollHeight;
+    }
+
+
+    function handleBlogCommand() {
+        window.location.href = 'blog.html';
     }
 
 });
