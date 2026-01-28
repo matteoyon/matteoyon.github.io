@@ -17,35 +17,26 @@
     <div id="post-content"></div>
     
     <script type="module">
-        const blogPosts = [
-            {
-                title: 'My Second Blog Post',
-                date: '2025-05-04',
-                url: 'resources/blog/20250504-2045.md'
-            },
-            {
-                title: 'My First Blog Post',
-                date: '2025-05-04',
-                url: 'resources/blog/20250504-2045.md'
-            }
-            // Add more blog posts here
-        ];
         const list = document.getElementById('blog-list');
         const postContent = document.getElementById('post-content');
 
-        blogPosts.forEach(post => {
-            const li = document.createElement('li');
-            li.innerHTML = `<a href="#">${post.title}</a> <small>${post.date}</small>`;
-            li.querySelector('a').addEventListener('click', async (e) => {
-                e.preventDefault();
-                const res = await fetch(post.url);
-                const md = await res.text();
-                postContent.innerHTML = marked.parse(md);
-                postContent.style.display = 'block';
-                list.style.display = 'none';
+        fetch('resources/blog/blog-index.json')
+            .then(res => res.json())
+            .then(blogPosts => {
+                blogPosts.forEach(post => {
+                    const li = document.createElement('li');
+                    li.innerHTML = `<a href="#">${post.title}</a> <small>${post.date}</small>`;
+                    li.querySelector('a').addEventListener('click', async (e) => {
+                        e.preventDefault();
+                        const res = await fetch(post.url);
+                        const md = await res.text();
+                        postContent.innerHTML = `<a href="blog.html">Back to blog list</a>` + marked.parse(md);
+                        postContent.style.display = 'block';
+                        list.style.display = 'none';
+                    });
+                    list.appendChild(li);
+                });
             });
-            list.appendChild(li);
-        });
     </script>
 </body>
 
