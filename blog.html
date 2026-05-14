@@ -3,19 +3,34 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Blog Posts - MY website</title>
+    <title>Blog - matteoyon.github.io</title>
     <link rel="stylesheet" href="styles.css">
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 </head>
 
 <body>
-    <div>
-    <h1>Blog Posts</h1>
-    <a href="index.html">Back to terminal</a></br>
-    <br>A not so interesting list of what pops in my mind<br>
-    <ul id="blog-list"></ul>
-    <div id="post-content"></div>
-    
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-title">matteoyon.github.io</div>
+            </div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li><a href="index.html">&lt; Back to Terminal</a></li>
+                    <li style="margin: 10px 0; border-bottom: 1px solid #333;"></li>
+                </ul>
+                <ul id="blog-list">
+                </ul>
+            </nav>
+        </aside>
+        <main class="main-content">
+            <div id="post-content" class="blog-content">
+                <h1>Blog</h1>
+                <p>Select a post from the sidebar to read.</p>
+            </div>
+        </main>
+    </div>
+
     <script type="module">
         const list = document.getElementById('blog-list');
         const postContent = document.getElementById('post-content');
@@ -25,17 +40,32 @@
             .then(blogPosts => {
                 blogPosts.forEach(post => {
                     const li = document.createElement('li');
-                    li.innerHTML = `<a href="#">${post.title}</a> <small>${post.date}</small>`;
-                    li.querySelector('a').addEventListener('click', async (e) => {
+                    const a = document.createElement('a');
+                    a.href = "#";
+                    a.textContent = post.title;
+
+                    a.addEventListener('click', async (e) => {
                         e.preventDefault();
-                        const res = await fetch(post.url);
-                        const md = await res.text();
-                        postContent.innerHTML = `<a href="blog.html">Back to blog list</a>` + marked.parse(md);
-                        postContent.style.display = 'block';
-                        list.style.display = 'none';
+                        // Highlight active link
+                        document.querySelectorAll('#blog-list a').forEach(el => el.style.color = '');
+                        a.style.color = '#fff';
+
+                        try {
+                            const res = await fetch(post.url);
+                            if (!res.ok) throw new Error('Post not found');
+                            const md = await res.text();
+                            postContent.innerHTML = marked.parse(md);
+                        } catch (err) {
+                            postContent.innerHTML = `<p style="color: red">Error loading post: ${err.message}</p>`;
+                        }
                     });
+
+                    li.appendChild(a);
                     list.appendChild(li);
                 });
+            })
+            .catch(err => {
+                list.innerHTML = `<li style="padding: 10px; color: red;">Error loading posts</li>`;
             });
     </script>
 </body>

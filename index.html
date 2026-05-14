@@ -1,23 +1,42 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE-edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>MY website</title>
-        <link rel="stylesheet" href="styles.css">
-        <style>
-            @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
-        </style>
-    </head>
-    <body>
-        <div class="terminal">
-            <div class="output"></div>
-            <div class="input-line">
-                <span class="prompt">~</span>
-                <input type="text" id="cmd-input" placeholder="Welcome to MY website. Type a command to begin." autofocus>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE-edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MY website</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
+    </style>
+</head>
+
+<body>
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-title">matteoyon.github.io</div>
             </div>
-        </div>
-        <script type="module" src="script.js"></script>
-    </body>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li><button data-cmd="about">about</button></li>
+                    <li><button data-cmd="projects">projects</button></li>
+                    <li><button data-cmd="blog">blog</button></li>
+                    <li><button data-cmd="contact">contact</button></li>
+                    <li><button data-cmd="help">help</button></li>
+                </ul>
+            </nav>
+        </aside>
+        <main class="main-content">
+            <div class="terminal-output" aria-live="polite"></div>
+            <div class="input-area">
+                <span class="prompt">my_username@my_website:~$</span>
+                <input type="text" id="cmd-input" placeholder="Type a command..." autofocus aria-label="Command Input">
+            </div>
+        </main>
+    </div>
+    <script type="module" src="script.js"></script>
+</body>
+
 </html>
